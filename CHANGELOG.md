@@ -1,6 +1,46 @@
 # Changelog
 
-## 0.9.1
+## WIP
+
+Improvements requiring migrations:
+
+* added missing migration for help_text
+* update models to have explicit on_delete settings for Foreign Keys (required by Django 2.0)
+
+## 2.0.0 (2017-07-19)
+
+Backwards-incompatible changes:
+
+* Implementation of [OCDEP #101](http://docs.opencivicdata.org/en/latest/proposals/0101.html) - datetime fields are fuzzy and Event's start/end_time are now start/end_date.
+
+Improvments requiring migrations:
+
+* add extras to BillAction & EventAgendaItem
+* add Post.maximum_memberships for validating expected number of memberships, useful for multi-member seats
+
+Improvements:
+
+* jurisdiction specific merge tool
+* experimental introduction of opencivicdata.elections - provisional for now w/ future changes likely
+
+Bugfix:
+
+* fix usage of FileNotFoundError on Python 2.7
+
+## 1.0.0 (2017-05-25)
+
+Backwards-incompatible changes:
+
+* This package is renamed to opencivicdata from opencivicdata-divisions and opencivicdata-django.
+ This also means it is no longer split into opencivicdata-divisions and opencivicdata-django.  This really shouldn't cause any issues, but you shouldn't be installing opencivicdata-divisions anymore, and doing so explicitly may cause some issues.
+* Your requirements.txt or other requirements definition should now use the opencivicdata name exclusively.
+* Instead of adding:
+    ```'opencivicdata.apps.BaseConfig'`` to your ``INSTALLED_APPS`` you'll need to add:
+    ```
+    'opencivicdata.core.apps.BaseConfig',
+    'opencivicdata.legislative.apps.BaseConfig',
+    ```
+* If you already have models you'll need to run: ```./manage.py migrate --fake-initial`` to skip the initial migrations for the two new apps.
 
 Improvements requiring migrations:
 
@@ -10,7 +50,8 @@ Improvements requiring migrations:
 Improvements:
 
 * Add `amendment-deferral` to match `deferral` and other amendment actions.
-* Basic Python 2.7 support
+* Add `study request` and `concurrent study request` to to bill classifications.
+* Basic Python 2.7 support is restored.
 
 ## 0.9.0 (2017-02-19)
 

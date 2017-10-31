@@ -1,7 +1,10 @@
 from django.test import TestCase
-from opencivicdata.models import (Division, Organization, Person, Bill,
-                                  Jurisdiction, BillSponsorship, Post, Membership)
-from opencivicdata.models.merge import compute_diff, merge
+from opencivicdata.core.models import (Division, Organization, Person,
+                                       Jurisdiction, Post, Membership)
+from opencivicdata.legislative.models import Bill, BillSponsorship
+from opencivicdata.merge import merge
+
+# TODO: compute_diff test?
 
 
 class TestPersonMerge(TestCase):
@@ -56,7 +59,7 @@ class TestPersonMerge(TestCase):
         person2 = Person.objects.create(name='Barack Obama')
         person1.contact_details.create(type='fax', value='555-123-4567')
         person2.contact_details.create(type='fax', value='555-123-4567',
-                                         note="Throw out your fax!")
+                                       note="Throw out your fax!")
         person1.contact_details.create(type='email', value='obama@aol.com')
         person2.contact_details.create(type='email', value='prez@america.gov')
 
@@ -71,8 +74,8 @@ class TestPersonMerge(TestCase):
         person2 = Person.objects.create(name='Barack Obama')
         d = Division.objects.create(id='ocd-division/country:us', name='US')
         j = Jurisdiction.objects.create(name='US', division=d)
-        l = j.legislative_sessions.create(name='2015')
-        b = Bill.objects.create(identifier='HB 1', legislative_session=l)
+        session = j.legislative_sessions.create(name='2015')
+        b = Bill.objects.create(identifier='HB 1', legislative_session=session)
         sp = BillSponsorship.objects.create(bill=b, person=person2)
 
         merge(person1, person2)

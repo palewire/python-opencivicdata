@@ -1,4 +1,4 @@
 [run]
 omit =  opencivicdata/tests/*
-        opencivicdata/migrations/*
-        opencivicdata/admin/*
+        opencivicdata/*/migrations/*
+        opencivicdata/*/admin/*
