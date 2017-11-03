@@ -170,6 +170,7 @@ class Transaction(OCDBase):
     A contribution, expenditure, loan or other two-party transfer reported on a Filing.
     """
 
+    id = OCDIDField(ocd_type='campaign-finance-filing-transaction')
     filing_action = models.ForeignKey(
         FilingAction,
         related_name='transactions',
@@ -269,7 +270,7 @@ class Transaction(OCDBase):
         """
         Model options.
         """
-        db_table = 'opencivicdata_filingtransaction'
+        db_table = 'opencivicdata_transaction'
 
 
 @python_2_unicode_compatible
