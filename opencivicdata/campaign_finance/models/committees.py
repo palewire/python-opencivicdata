@@ -10,6 +10,7 @@ from django.contrib.postgres.fields import ArrayField
 from opencivicdata.core.models import Jurisdiction
 from opencivicdata.core.models.base import (
     IdentifierBase,
+    LinkBase,
     OCDBase,
     OCDIDField,
 )
@@ -234,3 +235,21 @@ class CommitteeName(OtherNameBase):
         Model options.
         """
         db_table = 'opencivicdata_committeename'
+
+
+class CommitteeSource(LinkBase):
+    """
+    Source used in assembling a Committee.
+    """
+    committee = models.ForeignKey(
+        Committee,
+        related_name='sources',
+        on_delete=models.CASCADE,
+        help_text="Reference to the Committee this source verifies.",
+    )
+
+    class Meta:
+        """
+        Model options.
+        """
+        db_table = 'opencivicdata_committeesource'
