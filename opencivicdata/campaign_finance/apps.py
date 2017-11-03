@@ -5,6 +5,6 @@ import os
 
 
 class BaseConfig(AppConfig):
-    name = 'opencivicdata.elections'
-    verbose_name = 'Open Civic Data - Elections'
+    name = 'opencivicdata.campaign_finance'
+    verbose_name = 'Open Civic Data - Campaign Finance'
     path = os.path.dirname(__file__)
