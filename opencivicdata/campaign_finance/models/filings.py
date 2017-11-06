@@ -31,19 +31,13 @@ class Filing(OCDBase):
         help_text='The type of filing, as defined by the jurisdiction in which '
                   'it was filed.',
     )
-    coverage_start_date = models.DateTimeField(
+    coverage_start_date = models.DateField(
         blank=True,
-        help_text='Date (and possibly time) when filing period of coverage begins.',
+        help_text='Date when filing period of coverage begins.',
     )
-    coverage_end_date = models.DateTimeField(
+    coverage_end_date = models.DateField(
         blank=True,
-        help_text='Date (and possibly time) when filing period of coverage ends.',
-    )
-    election = models.ManyToManyField(
-        Election,
-        related_name='filings',
-        db_table='opencivicdata_filingelection',
-        help_text='Elections relevant to this filing.',
+        help_text='Date when filing period of coverage ends.',
     )
     filer = models.ForeignKey(
         Committee,
@@ -123,6 +117,41 @@ class FilingAction(OCDBase):
 
 
 @python_2_unicode_compatible
+class FilingActionSummaryAmount(models.Model):
+    """
+    An amount reported on a Filing, not necessarily calculable by aggregating transactions.
+    """
+
+    filing_action = models.ForeignKey(
+        FilingAction,
+        related_name='summary_amounts',
+        help_text='Reference to a FilingAction in which the summary amount was reported.',
+    )
+    label = models.CharField(
+        max_length=100,
+        help_text='Description of the total (e.g., "Unitemized contributions" '
+                  'or "Total expenditures").',
+    )
+    amount_value = models.FloatField(
+        help_text='Decimal amount of transaction.',
+    )
+    amount_currency = models.CharField(
+        max_length=3,
+        help_text='Currency denomination of transaction.',
+    )
+
+    def __str__(self):
+        tmpl = '%s (%s)'
+        return tmpl % (self.amount_value, self.label)
+
+    class Meta:
+        """
+        Model options.
+        """
+        db_table = 'opencivicdata_filingactionsummaryamount'
+
+
+@python_2_unicode_compatible
 class FilingIdentifier(IdentifierBase):
     """
     Upstream identifiers of a Filing.
@@ -150,6 +179,7 @@ class FilingSource(LinkBase):
     """
     Source used in assembling a Filing.
     """
+
     filing = models.ForeignKey(
         Filing,
         related_name='sources',
@@ -195,6 +225,12 @@ class Transaction(OCDBase):
     is_in_kind = models.BooleanField(
         default=False,
         help_text='Indicates this is an in-kind (i.e., non-monetary) Transaction.',
+    )
+    election = models.ForeignKey(
+        Election,
+        related_name='transactions',
+        null=True,
+        help_text='Reference to the Election to which the transaction is designated.',
     )
     ENTITY_TYPES = (
         ("committee", "Committee"),
@@ -258,10 +294,6 @@ class Transaction(OCDBase):
     date = models.DateField(
         help_text='Date reported for transaction.',
     )
-    note = models.TextField(
-        blank=True,
-        help_text='Note describing the transaction.',
-    )
 
     def __str__(self):
         return '{0.amount} {0.classification} on {0.date}'.format(self)
@@ -295,6 +327,32 @@ class TransactionIdentifier(IdentifierBase):
         Model options.
         """
         db_table = 'opencivicdata_transactionidentifier'
+
+
+@python_2_unicode_compatible
+class TransactionNote(models.Model):
+    """
+    A note describing a Transaction.
+    """
+
+    transaction = models.ForeignKey(
+        Transaction,
+        related_name='notes',
+        help_text='Reference to a Transaction described by the note.',
+    )
+    note = models.TextField(
+        help_text='Text of the note.',
+    )
+
+    def __str__(self):
+        tmpl = '%s (%s)'
+        return tmpl % (self.note, self.transaction)
+
+    class Meta:
+        """
+        Model options.
+        """
+        db_table = 'opencivicdata_transactionnote'
 
 
 class TransactionSource(LinkBase):
