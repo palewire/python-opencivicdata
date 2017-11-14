@@ -247,6 +247,7 @@ class Transaction(OCDBase):
         Committee,
         related_name='transactions_sent',
         on_delete=models.PROTECT,
+        null=True,
         help_text='Reference to Committee that sent the transaction, if '
                   'sender_entity_type is "Committee".',
     )
@@ -254,6 +255,7 @@ class Transaction(OCDBase):
         Organization,
         related_name='transactions_sent',
         on_delete=models.PROTECT,
+        null=True,
         help_text='Reference to Organization that sent the transaction, if '
                   'sender_entity_type is "Organization".',
     )
@@ -261,6 +263,7 @@ class Transaction(OCDBase):
         Person,
         related_name='transactions_sent',
         on_delete=models.PROTECT,
+        null=True,
         help_text='Reference to Person that sent the transaction, if '
                   'sender_entity_type is "Person".',
     )
@@ -274,6 +277,7 @@ class Transaction(OCDBase):
         Committee,
         related_name='transactions_received',
         on_delete=models.PROTECT,
+        null=True,
         help_text='Reference to Committee that received the transaction, if '
                   'recipient_entity_type is "Committee".',
     )
@@ -281,6 +285,7 @@ class Transaction(OCDBase):
         Organization,
         related_name='transactions_received',
         on_delete=models.PROTECT,
+        null=True,
         help_text='Reference to Organization that received the transaction, if '
                   'recipient_entity_type is "Organization".',
     )
@@ -288,6 +293,7 @@ class Transaction(OCDBase):
         Person,
         related_name='transactions_received',
         on_delete=models.PROTECT,
+        null=True,
         help_text='Reference to Person that sent the transaction, if '
                   'recipient_entity_type is "Person".',
     )
