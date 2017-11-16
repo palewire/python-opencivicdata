@@ -26,7 +26,6 @@ class CommitteeType(OCDBase):
     """
     A category defined by the Jurisdiction in which the Committee is regulated.
     """
-
     id = OCDIDField(ocd_type='campaign-finance-committee-type')
     name = models.CharField(
         max_length=100,
@@ -39,14 +38,15 @@ class CommitteeType(OCDBase):
         help_text='Reference to the Jurisdiction which defines the Committee Type.',
     )
 
-    def __str__(self):
-        return '{0.name} in {0.jurisdiction}'.format(self)
-
     class Meta:
         """
         Model options.
         """
         db_table = 'opencivicdata_committeetype'
+        ordering = ("name",)
+
+    def __str__(self):
+        return '{0.name} in {0.jurisdiction}'.format(self)
 
 
 @python_2_unicode_compatible
@@ -54,7 +54,6 @@ class Committee(OCDBase):
     """
     An Organization required to submit campaign finance filings.
     """
-
     id = OCDIDField(ocd_type='campaign-finance-committee')
     name = models.CharField(max_length=300, help_text="The name of the Committee.")
     image = models.URLField(
@@ -83,6 +82,13 @@ class Committee(OCDBase):
         help_text='Ballot Measure Options for which the Committee declared support.',
     )
 
+    class Meta:
+        """
+        Model options.
+        """
+        db_table = 'opencivicdata_committee'
+        ordering = ("name",)
+
     def __str__(self):
         return self.name
 
@@ -97,19 +103,12 @@ class Committee(OCDBase):
             else:
                 break
 
-    class Meta:
-        """
-        Model options.
-        """
-        db_table = 'opencivicdata_committee'
-
 
 @python_2_unicode_compatible
 class CommitteeStatus(models.Model):
     """
     A Committee's (e.g., "active"), including the time period when applied.
     """
-
     committee = models.ForeignKey(
         Committee,
         related_name='statuses',
@@ -139,25 +138,24 @@ class CommitteeStatus(models.Model):
                   "associated with it.",
     )
 
+    class Meta:
+        """
+        Model options.
+        """
+        db_table = 'opencivicdata_committeestatus'
+    
     def __str__(self):
         tmp = '{0} is {1} ({2}-{3})'.format(
             self.committee, self.classification, self.start_date, self.end_date
         )
         return tmp
 
-    class Meta:
-        """
-        Model options.
-        """
-        db_table = 'opencivicdata_committeestatus'
-
-
+    
 @python_2_unicode_compatible
 class CommitteeCandidacyDesignation(models.Model):
     """
     A Candidacy for which a Committee declared a position or focused its activity.
     """
-
     committee = models.ForeignKey(
         Committee,
         related_name='candidacy_designations',
@@ -199,7 +197,6 @@ class CommitteeIdentifier(IdentifierBase):
     """
     Upstream identifiers of a Committee.
     """
-
     committee = models.ForeignKey(
         Committee,
         related_name='identifiers',
@@ -222,7 +219,6 @@ class CommitteeName(OtherNameBase):
     """
     Alternate or former name for a Committee.
     """
-
     committee = models.ForeignKey(
         Committee,
         related_name='other_names',
