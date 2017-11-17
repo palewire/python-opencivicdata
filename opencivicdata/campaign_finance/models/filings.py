@@ -23,7 +23,6 @@ class Filing(OCDBase):
     """
     A campaign finance document filed by a Committee with a regulator.
     """
-
     id = OCDIDField(ocd_type='campaign-finance-filing')
     classification = models.CharField(
         max_length=100,
@@ -53,22 +52,23 @@ class Filing(OCDBase):
                   ' the filing was submitted.',
     )
 
-    def __str__(self):
-        return '{0.filer} ({0.coverage_start_date}-{0.coverage_end_date})'.format(self)
-
     class Meta:
         """
         Model options.
         """
         db_table = 'opencivicdata_filing'
+        ordering = ("-coverage_start_date",)
+        get_latest_by = 'coverage_start_date
 
+    def __str__(self):
+        return '{0.filer} ({0.coverage_start_date}-{0.coverage_end_date})'.format(self)
+       
 
 @python_2_unicode_compatible
 class FilingAction(OCDBase):
     """
     An action that takes place on a filing, such as amendments, withdrawals, etc.
     """
-
     id = OCDIDField(ocd_type='campaign-finance-filing-action')
     filing = models.ForeignKey(
         Filing,
@@ -106,14 +106,14 @@ class FilingAction(OCDBase):
                   'transaction list) should be considered current.',
     )
 
-    def __str__(self):
-        return '{0.description} ({0.date})'.format(self)
-
     class Meta:
         """
         Model options.
         """
         db_table = 'opencivicdata_filingaction'
+
+    def __str__(self):
+        return '{0.description} ({0.date})'.format(self)
 
 
 @python_2_unicode_compatible
@@ -121,7 +121,6 @@ class FilingActionSummaryAmount(models.Model):
     """
     An amount reported on a Filing, not necessarily calculable by aggregating transactions.
     """
-
     filing_action = models.ForeignKey(
         FilingAction,
         related_name='summary_amounts',
@@ -140,15 +139,15 @@ class FilingActionSummaryAmount(models.Model):
         help_text='Currency denomination of transaction.',
     )
 
-    def __str__(self):
-        tmpl = '%s (%s)'
-        return tmpl % (self.amount_value, self.label)
-
     class Meta:
         """
         Model options.
         """
         db_table = 'opencivicdata_filingactionsummaryamount'
+
+    def __str__(self):
+        tmpl = '%s (%s)'
+        return tmpl % (self.amount_value, self.label)
 
 
 @python_2_unicode_compatible
@@ -156,7 +155,6 @@ class FilingIdentifier(IdentifierBase):
     """
     Upstream identifiers of a Filing.
     """
-
     filing = models.ForeignKey(
         Filing,
         related_name='identifiers',
@@ -164,22 +162,21 @@ class FilingIdentifier(IdentifierBase):
         help_text="Reference to the Filing identified by this alternative identifier.",
     )
 
-    def __str__(self):
-        tmpl = '%s identifies %s'
-        return tmpl % (self.identifier, self.filing)
-
     class Meta:
         """
         Model options.
         """
         db_table = 'opencivicdata_filingidentifier'
 
+    def __str__(self):
+        tmpl = '%s identifies %s'
+        return tmpl % (self.identifier, self.filing)
+
 
 class FilingSource(LinkBase):
     """
     Source used in assembling a Filing.
     """
-
     filing = models.ForeignKey(
         Filing,
         related_name='sources',
@@ -199,7 +196,6 @@ class Transaction(OCDBase):
     """
     A contribution, expenditure, loan or other two-party transfer reported on a Filing.
     """
-
     id = OCDIDField(ocd_type='campaign-finance-filing-transaction')
     filing_action = models.ForeignKey(
         FilingAction,
@@ -301,14 +297,14 @@ class Transaction(OCDBase):
         help_text='Date reported for transaction.',
     )
 
-    def __str__(self):
-        return '{0.amount} {0.classification} on {0.date}'.format(self)
-
     class Meta:
         """
         Model options.
         """
         db_table = 'opencivicdata_transaction'
+
+    def __str__(self):
+        return '{0.amount} {0.classification} on {0.date}'.format(self)
 
 
 @python_2_unicode_compatible
@@ -316,7 +312,6 @@ class TransactionIdentifier(IdentifierBase):
     """
     Upstream identifiers of a Transaction.
     """
-
     transaction = models.ForeignKey(
         Transaction,
         related_name='identifiers',
@@ -324,15 +319,15 @@ class TransactionIdentifier(IdentifierBase):
         help_text="Reference to the Transaction identified by this alternative identifier.",
     )
 
-    def __str__(self):
-        tmpl = '%s identifies %s'
-        return tmpl % (self.identifier, self.transaction)
-
     class Meta:
         """
         Model options.
         """
         db_table = 'opencivicdata_transactionidentifier'
+
+    def __str__(self):
+        tmpl = '%s identifies %s'
+        return tmpl % (self.identifier, self.transaction)
 
 
 @python_2_unicode_compatible
@@ -340,7 +335,6 @@ class TransactionNote(models.Model):
     """
     A note describing a Transaction.
     """
-
     transaction = models.ForeignKey(
         Transaction,
         related_name='notes',
@@ -350,22 +344,21 @@ class TransactionNote(models.Model):
         help_text='Text of the note.',
     )
 
-    def __str__(self):
-        tmpl = '%s (%s)'
-        return tmpl % (self.note, self.transaction)
-
     class Meta:
         """
         Model options.
         """
         db_table = 'opencivicdata_transactionnote'
 
+    def __str__(self):
+        tmpl = '%s (%s)'
+        return tmpl % (self.note, self.transaction)
+
 
 class TransactionSource(LinkBase):
     """
     Source used in assembling a Transaction.
     """
-
     transaction = models.ForeignKey(
         Transaction,
         related_name='sources',
