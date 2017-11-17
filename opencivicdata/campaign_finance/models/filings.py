@@ -61,7 +61,7 @@ class Filing(OCDBase):
         get_latest_by = 'coverage_start_date'
 
     def __str__(self):
-        return '{0.filer} ({0.coverage_start_date}-{0.coverage_end_date})'.format(self)
+        return '{0.filer} ({0.coverage_start_date} – {0.coverage_end_date})'.format(self)
        
 
 @python_2_unicode_compatible
