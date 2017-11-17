@@ -111,6 +111,8 @@ class FilingAction(OCDBase):
         Model options.
         """
         db_table = 'opencivicdata_filingaction'
+        ordering = ("-date",)
+        get_latest_by = "date"
 
     def __str__(self):
         return '{0.description} ({0.date})'.format(self)
