@@ -86,6 +86,7 @@ class FilingAction(OCDBase):
         help_text='Description of the action.',
     )
     date = models.DateField(
+
         help_text='The date the action occurred',
     )
     agent = models.ManyToManyField(
@@ -298,6 +299,7 @@ class Transaction(OCDBase):
                   'recipient_entity_type is "Person".',
     )
     date = models.DateField(
+        null=True,
         help_text='Date reported for transaction.',
     )
 
