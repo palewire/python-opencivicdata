@@ -146,6 +146,7 @@ class FilingActionSummaryAmount(models.Model):
         Model options.
         """
         db_table = 'opencivicdata_filingactionsummaryamount'
+        ordering = ("filing_action", "label",)
 
     def __str__(self):
         tmpl = '%s (%s)'
