@@ -5,6 +5,7 @@ Committee-related models.
 """
 from django.contrib import admin
 from opencivicdata.core.admin import base
+from opencivicdata.core.admin.base import ModelAdmin, ReadOnlyTabularInline, IdentifierInline
 from .. import models
 
 
@@ -30,6 +31,15 @@ class CommitteeTypeAdmin(base.ModelAdmin):
     list_filter = ("jurisdiction__name",)
 
 
+class CommitteeIdentifierInline(base.IdentifierInline):
+    model = models.CommitteeIdentifier
+
+
+class CommitteeSourceInline(base.ReadOnlyTabularInline):
+    readonly_fields = ('url', 'note')
+    model = models.CommitteeSource
+
+
 @admin.register(models.Committee)
 class CommitteeAdmin(base.ModelAdmin):
     """
@@ -53,3 +63,7 @@ class CommitteeAdmin(base.ModelAdmin):
     fields = readonly_fields
     search_fields = ("name",)
     list_filter = ("committee_type__name",)
+    inlines = (
+        CommitteeIdentifierInline,
+        CommitteeSourceInline
+    )
