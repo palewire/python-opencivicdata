@@ -46,10 +46,16 @@ class CommitteeSourceInline(base.ReadOnlyTabularInline):
     model = models.CommitteeSource
 
 
-class CommitteeNameInline(base.OtherNameInline):
+class CommitteeNameInline(base.ReadOnlyTabularInline):
     """
     Custom inline administrative panely for CommitteeName model.
     """
+    readonly_fields = (
+        'name',
+        'note',
+        'start_date',
+        'end_date',
+    )
     model = models.CommitteeName
 
 
