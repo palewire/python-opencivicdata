@@ -27,9 +27,7 @@ class CommitteeTypeAdmin(base.ModelAdmin):
     )
     fields = readonly_fields
     search_fields = ("name",)
-    list_filter = (
-        "jurisdiction__name",
-    )
+    list_filter = ("jurisdiction__name",)
 
 
 @admin.register(models.Committee)
@@ -43,7 +41,7 @@ class CommitteeAdmin(base.ModelAdmin):
         "committee_type",
         "image",
         "parent",
-        "ballot_measure_options_supported"
+        "ballot_measure_options_supported",
         "extras",
         "created_at",
         "updated_at",
@@ -54,6 +52,4 @@ class CommitteeAdmin(base.ModelAdmin):
     )
     fields = readonly_fields
     search_fields = ("name",)
-    list_filter = (
-        "committee_type__name",
-    )
+    list_filter = ("committee_type__name",)
