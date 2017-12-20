@@ -30,7 +30,7 @@ class FilingAdmin(base.ModelAdmin):
     Custom administrative panel for the Filing model.
     """
     def get_filer_name(self, obj):
-        return truncatechars(obj.filer.name, 15)
+        return truncatechars(obj.filer.name, 40)
     get_filer_name.short_description = 'Filer'
 
     readonly_fields = (
