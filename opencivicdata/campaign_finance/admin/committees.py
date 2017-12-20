@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Committee-related models
+Committee-related models.
 """
 from django.contrib import admin
 from opencivicdata.core.admin import base
