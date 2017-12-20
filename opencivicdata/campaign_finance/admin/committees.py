@@ -42,8 +42,39 @@ class CommitteeSourceInline(base.ReadOnlyTabularInline):
     """
     Custom inline administrative panely for CommitteeSource model.
     """
-    readonly_fields = ('url', 'note')
+    readonly_fields = ("url", "note")
     model = models.CommitteeSource
+
+
+class CommitteeNameInline(base.OtherNameInline):
+    """
+    Custom inline administrative panely for CommitteeName model.
+    """
+    model = models.CommitteeName
+
+
+class CommitteeStatusInline(base.ReadOnlyTabularInline):
+    """
+    Custom inline administrative panely for CommitteeStatus model.
+    """
+    readonly_fields = (
+        "classification",
+        "note",
+        "start_date",
+        "end_date"
+    )
+    model = models.CommitteeStatus
+
+
+class CommitteeCandidacyDesignationInline(base.ReadOnlyTabularInline):
+    """
+    Custom inline administrative panely for CommitteeCandidacyDesignation model.
+    """
+    readonly_fields = (
+        "candidacy",
+        "designation",
+    )
+    model = models.CommitteeCandidacyDesignation
 
 
 @admin.register(models.Committee)
@@ -71,5 +102,8 @@ class CommitteeAdmin(base.ModelAdmin):
     list_filter = ("committee_type__name",)
     inlines = (
         CommitteeIdentifierInline,
+        CommitteeNameInline,
+        CommitteeStatusInline,
+        CommitteeCandidacyDesignationInline,
         CommitteeSourceInline
     )
