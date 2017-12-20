@@ -14,10 +14,18 @@ class CommitteeTypeAdmin(base.ModelAdmin):
     Custom administrative panel for the CommitteeType model.
     """
     readonly_fields = (
+        'id',
         'created_at',
         'updated_at',
+        'jurisdiction',
+        'extras'
     )
     list_display = (
         "name",
         "jurisdiction",
+    )
+    fields = ("name",) + readonly_fields
+    search_fields = ("name",)
+    list_filter = (
+        'jurisdiction__name',
     )
