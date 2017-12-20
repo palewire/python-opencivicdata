@@ -32,10 +32,16 @@ class CommitteeTypeAdmin(base.ModelAdmin):
 
 
 class CommitteeIdentifierInline(base.IdentifierInline):
+    """
+    Custom inline administrative panely for CommitteeIdentifier model.
+    """
     model = models.CommitteeIdentifier
 
 
-class CommitteeSourceInline(base.ReadOnlyTabularInline):
+class CommitteeSourceInline(base.LinkInline):
+    """
+    Custom inline administrative panely for CommitteeSource model.
+    """
     readonly_fields = ('url', 'note')
     model = models.CommitteeSource
 
