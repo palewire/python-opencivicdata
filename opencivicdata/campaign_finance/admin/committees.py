@@ -42,6 +42,7 @@ class CommitteeSourceInline(base.ReadOnlyTabularInline):
     """
     Custom inline administrative panely for CommitteeSource model.
     """
+    readonly_fields = ('url', 'note')
     model = models.CommitteeSource
 
 
