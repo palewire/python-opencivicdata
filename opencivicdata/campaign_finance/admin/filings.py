@@ -29,10 +29,9 @@ class FilingAdmin(base.ModelAdmin):
     Custom administrative panel for the Filing model.
     """
     readonly_fields = (
-        "name",
         "id",
-        "classification",
         "filer",
+        "classification",
         "recipient",
         "coverage_start_date",
         "coverage_end_date",
@@ -41,12 +40,14 @@ class FilingAdmin(base.ModelAdmin):
         "updated_at",
     )
     list_display = (
-        "name",
-        "classification",
+        "id",
         "filer",
+        "classification",
+        "coverage_start_date",
+        "coverage_end_date",
     )
     fields = readonly_fields
-    search_fields = ("name",)
+    search_fields = ("filer__name",)
     list_filter = ("filer__name",)
     date_hierarchy = "coverage_start_date"
     inlines = (
