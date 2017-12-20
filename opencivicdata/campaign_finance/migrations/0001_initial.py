@@ -99,6 +99,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'opencivicdata_committeestatus',
+                'verbose_name_plural': 'committee statuses'
             },
         ),
         migrations.CreateModel(
