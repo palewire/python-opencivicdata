@@ -143,14 +143,15 @@ class CommitteeStatus(models.Model):
         Model options.
         """
         db_table = 'opencivicdata_committeestatus'
-    
+        verbose_name_plural = 'committee statuses'
+
     def __str__(self):
         tmp = '{0} is {1} ({2}-{3})'.format(
             self.committee, self.classification, self.start_date, self.end_date
         )
         return tmp
 
-    
+
 @python_2_unicode_compatible
 class CommitteeCandidacyDesignation(models.Model):
     """
