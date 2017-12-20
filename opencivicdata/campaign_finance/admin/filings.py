@@ -5,6 +5,7 @@ Committee-related models.
 """
 from django.contrib import admin
 from opencivicdata.core.admin import base
+from django.template.defaultfilters import truncatechars
 from .. import models
 
 
@@ -28,6 +29,10 @@ class FilingAdmin(base.ModelAdmin):
     """
     Custom administrative panel for the Filing model.
     """
+    def get_filer_name(self, obj):
+        return truncatechars(obj.filer.name, 15)
+    get_filer_name.short_description = 'Filer'
+
     readonly_fields = (
         "id",
         "filer",
@@ -41,7 +46,7 @@ class FilingAdmin(base.ModelAdmin):
     )
     list_display = (
         "id",
-        "filer",
+        "get_filer_name",
         "classification",
         "coverage_start_date",
         "coverage_end_date",
