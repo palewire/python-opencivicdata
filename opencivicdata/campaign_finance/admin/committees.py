@@ -5,7 +5,6 @@ Committee-related models.
 """
 from django.contrib import admin
 from opencivicdata.core.admin import base
-from opencivicdata.core.admin.base import ModelAdmin, ReadOnlyTabularInline, IdentifierInline
 from .. import models
 
 
