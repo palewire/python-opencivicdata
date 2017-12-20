@@ -53,7 +53,7 @@ class FilingAdmin(base.ModelAdmin):
     )
     fields = readonly_fields
     search_fields = ("filer__name",)
-    list_filter = ("filer__name",)
+    list_filter = ("classification",)
     date_hierarchy = "coverage_start_date"
     inlines = (
         FilingIdentifierInline,
