@@ -71,7 +71,6 @@ class FilingAdmin(base.ModelAdmin):
     )
 
 
-@admin.register(models.FilingActionSummaryAmount)
 class FilingActionSummaryAmountInline(base.ReadOnlyTabularInline):
     """
     Custom administrative panel for the FilingActionSummaryAmount model.
