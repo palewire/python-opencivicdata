@@ -62,7 +62,7 @@ class Filing(OCDBase):
 
     def __str__(self):
         return '{0.filer} ({0.coverage_start_date} – {0.coverage_end_date})'.format(self)
-       
+
 
 @python_2_unicode_compatible
 class FilingAction(OCDBase):
@@ -86,7 +86,6 @@ class FilingAction(OCDBase):
         help_text='Description of the action.',
     )
     date = models.DateField(
-
         help_text='The date the action occurred',
     )
     agent = models.ManyToManyField(

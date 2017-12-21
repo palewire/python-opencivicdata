@@ -69,3 +69,38 @@ class FilingAdmin(base.ModelAdmin):
         FilingActionInline,
         FilingSourceInline
     )
+
+
+@admin.register(models.FilingAction)
+def FilingActionAdmin(base.ModelAdmin):
+    """
+    Custom administrative panel for the FilingAction model.
+    """
+    def get_filer_name(self, obj):
+        return truncatechars(obj.filing.filer.name, 40)
+    get_filer_name.short_description = 'Filer'
+
+    readonly_fields = (
+        "id",
+        "filing",
+        "date",
+        "classification",
+        "description",
+        "agent",
+        "supersedes_prior_versions",
+        "is_current",
+        "extras",
+        "created_at",
+        "updated_at",
+    )
+    list_display = (
+        "id",
+        "get_filer_name",
+        "date",
+        "classification",
+        "is_current",
+    )
+    fields = readonly_fields
+    search_fields = ("filing__filer__name", "filing__id",)
+    list_filter = ("classification", "is_current")
+    date_hierarchy = "date"
