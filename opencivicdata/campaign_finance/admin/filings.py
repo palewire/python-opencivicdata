@@ -72,7 +72,7 @@ class FilingAdmin(base.ModelAdmin):
 
 
 @admin.register(models.FilingAction)
-def FilingActionAdmin(base.ModelAdmin):
+class FilingActionAdmin(base.ModelAdmin):
     """
     Custom administrative panel for the FilingAction model.
     """
