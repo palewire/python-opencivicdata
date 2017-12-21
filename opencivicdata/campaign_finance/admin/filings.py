@@ -80,6 +80,10 @@ class FilingActionAdmin(base.ModelAdmin):
         return truncatechars(obj.filing.filer.name, 40)
     get_filer_name.short_description = 'Filer'
 
+    def get_filing_classification(self, obj):
+        return obj.filing.classification
+    get_filing_classification.description = 'Filing classification'
+
     readonly_fields = (
         "id",
         "filing",
@@ -96,7 +100,7 @@ class FilingActionAdmin(base.ModelAdmin):
     list_display = (
         "id",
         "get_filer_name",
-        "filing__classification",
+        "get_filing_classification",
         "date",
         "classification",
         "is_current",
