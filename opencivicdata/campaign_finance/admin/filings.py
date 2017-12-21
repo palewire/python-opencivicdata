@@ -96,11 +96,12 @@ class FilingActionAdmin(base.ModelAdmin):
     list_display = (
         "id",
         "get_filer_name",
+        "filing__classification",
         "date",
         "classification",
         "is_current",
     )
     fields = readonly_fields
     search_fields = ("filing__filer__name", "filing__id",)
-    list_filter = ("classification", "is_current")
+    list_filter = ("is_current",)
     date_hierarchy = "date"
