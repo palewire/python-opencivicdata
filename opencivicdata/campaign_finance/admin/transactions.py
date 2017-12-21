@@ -5,6 +5,7 @@ Transaction-related models.
 """
 from django.contrib import admin
 from opencivicdata.core.admin import base
+from django.template.defaultfilters import truncatechars
 from .. import models
 
 
@@ -45,6 +46,22 @@ class TransactionAdmin(base.ModelAdmin):
         "id",
         "filing_action",
         "classification",
+        # "date",
+        # "amount_value",
+        # "amount_currency",
+        # "is_in_kind",
+        # "election",
+        # "sender_entity_type",
+        # "sender_committee",
+        # "sender_organization",
+        # "sender_person",
+        # "recipient_entity_type",
+        # "recipient_committee",
+        # "recipient_organization",
+        # "recipient_person",
+        # "extras",
+        # "created_at",
+        # "updated_at",
     )
     list_display = (
         "id",
