@@ -82,7 +82,7 @@ class FilingActionAdmin(base.ModelAdmin):
 
     def get_filing_classification(self, obj):
         return obj.filing.classification
-    get_filing_classification.description = 'Filing classification'
+    get_filing_classification.short_description = 'Filing classification'
 
     readonly_fields = (
         "id",
