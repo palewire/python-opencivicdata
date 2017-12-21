@@ -72,7 +72,7 @@ class FilingAdmin(base.ModelAdmin):
 
 
 @admin.register(models.FilingActionSummaryAmount)
-class FilingActionSummaryAmountAdmin(base.ReadOnlyTabularInline):
+class FilingActionSummaryAmountInline(base.ReadOnlyTabularInline):
     """
     Custom administrative panel for the FilingActionSummaryAmount model.
     """
@@ -119,5 +119,5 @@ class FilingActionAdmin(base.ModelAdmin):
     list_filter = ("is_current",)
     date_hierarchy = "date"
     inlines = (
-        FilingActionSummaryAmountAdmin,
+        FilingActionSummaryAmountInline,
     )
