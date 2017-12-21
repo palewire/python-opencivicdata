@@ -37,4 +37,28 @@ class TransactionAdmin(base.ModelAdmin):
     """
     Custom administrative panel for the Transaction model.
     """
-    pass
+    def get_filer_name(self, obj):
+        return truncatechars(obj.filing_action.filer.name, 40)
+    get_filer_name.short_description = 'Filer'
+
+    readonly_fields = (
+        "id",
+        "filing_action",
+        "classification",
+    )
+    list_display = (
+        "id",
+        "get_filer_name",
+        "classification",
+        "date",
+        "amount_value",
+    )
+    fields = readonly_fields
+    search_fields = ("filingaction__filer__name",)
+    list_filter = ("classification",)
+    date_hierarchy = "date"
+    inlines = (
+        TransactionIdentifierInline,
+        TransactionNoteInline,
+        TransactionSourceInline
+    )
