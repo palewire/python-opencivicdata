@@ -132,7 +132,7 @@ class Transaction(OCDBase):
         db_table = 'opencivicdata_transaction'
 
     def __str__(self):
-        return '{0.amount} {0.classification} on {0.date}'.format(self)
+        return '{0.amount_value} {0.classification} on {0.date}'.format(self)
 
 
 @python_2_unicode_compatible
