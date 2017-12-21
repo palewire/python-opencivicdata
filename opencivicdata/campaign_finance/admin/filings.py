@@ -24,6 +24,15 @@ class FilingSourceInline(base.ReadOnlyTabularInline):
     model = models.FilingSource
 
 
+class FilingActionInline(base.ReadOnlyTabularInline):
+    """
+    Custom inline administrative panely for FilingAction model.
+    """
+    readonly_fields = ("date", "classification", "is_current",)
+    fields = readonly_fields
+    model = models.FilingAction
+
+
 @admin.register(models.Filing)
 class FilingAdmin(base.ModelAdmin):
     """
@@ -57,5 +66,6 @@ class FilingAdmin(base.ModelAdmin):
     date_hierarchy = "coverage_start_date"
     inlines = (
         FilingIdentifierInline,
+        FilingActionInline,
         FilingSourceInline
     )
