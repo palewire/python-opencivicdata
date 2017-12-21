@@ -71,6 +71,15 @@ class FilingAdmin(base.ModelAdmin):
     )
 
 
+@admin.register(models.FilingActionSummaryAmount)
+class FilingActionSummaryAmountAdmin(base.ReadOnlyTabularInline):
+    """
+    Custom administrative panel for the FilingActionSummaryAmount model.
+    """
+    readonly_fields = ("label", "amount_value", "amount_currency",)
+    model = models.FilingActionSummaryAmount
+
+
 @admin.register(models.FilingAction)
 class FilingActionAdmin(base.ModelAdmin):
     """
@@ -109,3 +118,6 @@ class FilingActionAdmin(base.ModelAdmin):
     search_fields = ("filing__filer__name", "filing__id",)
     list_filter = ("is_current",)
     date_hierarchy = "date"
+    inlines = (
+        FilingActionSummaryAmountAdmin,
+    )
