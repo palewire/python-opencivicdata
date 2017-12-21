@@ -29,3 +29,12 @@ class TransactionNoteInline(base.ReadOnlyTabularInline):
     """
     readonly_fields = ("note",)
     model = models.TransactionNote
+
+
+
+@admin.register(models.Transaction)
+class TransactionAdmin(base.ModelAdmin):
+    """
+    Custom administrative panel for the Transaction model.
+    """
+    pass
