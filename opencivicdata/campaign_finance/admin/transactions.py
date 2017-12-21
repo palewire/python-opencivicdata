@@ -32,7 +32,6 @@ class TransactionNoteInline(base.ReadOnlyTabularInline):
     model = models.TransactionNote
 
 
-
 @admin.register(models.Transaction)
 class TransactionAdmin(base.ModelAdmin):
     """
