@@ -1,11 +1,8 @@
 #!/usr/bin/env python
-import sys
-import setuptools
 from setuptools import setup, find_packages
 
 install_requires = [
-    'six',
-    'Django>=1.11',
+    'Django>=3.2.*',
     'psycopg2',
 ]
 
@@ -18,14 +15,6 @@ extras_require = {
       'flake8',
     ],
 }
-
-if int(setuptools.__version__.split(".", 1)[0]) < 18:
-    assert "bdist_wheel" not in sys.argv, "setuptools 18 required for wheels."
-    # For legacy setuptools + sdist.
-    if sys.version_info[0:2] <= (2, 7):
-        install_requires.append("backports.csv")
-else:
-    extras_require[":python_version<='2.7'"] = ["backports.csv"]
 
 setup(name="opencivicdata",
       version='2.1.1',
