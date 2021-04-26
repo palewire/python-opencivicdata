@@ -23,7 +23,7 @@ jobs:
         uses: harmon758/postgresql-action@v1
         with:
           postgresql version: '11'
-          postgresql: opencivicdata
+          postgresql: test
           postgresql user: postgres
           postgresql password: postgres
 
@@ -36,5 +36,5 @@ jobs:
 
       - name: Test
         run: |
-          make testdb
+          psql -c "CREATE EXTENSION postgis;" -U postgres -d test
           make test
