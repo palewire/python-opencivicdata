@@ -27,8 +27,8 @@ jobs:
         with:
           postgresql version: '11'
           postgresql: test
-          postgresql user: postgres
-          postgresql password: postgres
+          postgresql user: test
+          postgresql password: test
 
       - name: Install
         run: |
