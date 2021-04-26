@@ -20,7 +20,7 @@ jobs:
           python-version: ${{ matrix.python }}
 
       - name: Set up PostgreSQL
-        uses: harmon758/postgresql-action@v1
+        uses: huaxk/postgis-action@v1
         with:
           postgresql version: '11'
           postgresql: test
@@ -35,6 +35,4 @@ jobs:
         shell: bash
 
       - name: Test
-        run: |
-          psql -c "CREATE EXTENSION postgis;" -U postgres -d test
-          make test
+        run: make test
