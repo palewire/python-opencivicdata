@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 from django.contrib.gis.db import models
 from django.contrib.postgres.fields import ArrayField, JSONField
-from django.utils.encoding import python_2_unicode_compatible
 from opencivicdata.core.models.base import (OCDBase, LinkBase, OCDIDField,
                                             RelatedBase, RelatedEntityBase,
                                             MimetypeLinkBase)
@@ -27,7 +26,6 @@ class EventMediaBase(RelatedBase):
         abstract = True
 
 
-@python_2_unicode_compatible
 class EventLocation(RelatedBase):
     name = models.CharField(max_length=200)
     url = models.URLField(blank=True, max_length=2000)
@@ -44,7 +42,6 @@ class EventLocation(RelatedBase):
         db_table = 'opencivicdata_eventlocation'
 
 
-@python_2_unicode_compatible
 class Event(OCDBase):
     id = OCDIDField(ocd_type='event')
     name = models.CharField(max_length=300)
@@ -71,7 +68,6 @@ class Event(OCDBase):
         ]
 
 
-@python_2_unicode_compatible
 class EventMedia(EventMediaBase):
     event = models.ForeignKey(Event, related_name='media', on_delete=models.CASCADE)
 
@@ -82,7 +78,6 @@ class EventMedia(EventMediaBase):
         db_table = 'opencivicdata_eventmedia'
 
 
-@python_2_unicode_compatible
 class EventMediaLink(MimetypeLinkBase):
     media = models.ForeignKey(EventMedia, related_name='links', on_delete=models.CASCADE)
 
@@ -93,7 +88,6 @@ class EventMediaLink(MimetypeLinkBase):
         db_table = 'opencivicdata_eventmedialink'
 
 
-@python_2_unicode_compatible
 class EventDocument(MimetypeLinkBase):
     event = models.ForeignKey(Event, related_name='documents', on_delete=models.CASCADE)
     note = models.CharField(max_length=300)
@@ -107,7 +101,6 @@ class EventDocument(MimetypeLinkBase):
         db_table = 'opencivicdata_eventdocument'
 
 
-@python_2_unicode_compatible
 class EventDocumentLink(MimetypeLinkBase):
     document = models.ForeignKey(EventDocument, related_name='links', on_delete=models.CASCADE)
 
@@ -132,7 +125,6 @@ class EventSource(LinkBase):
         db_table = 'opencivicdata_eventsource'
 
 
-@python_2_unicode_compatible
 class EventParticipant(RelatedEntityBase):
     event = models.ForeignKey(Event, related_name='participants', on_delete=models.CASCADE)
     note = models.TextField()
@@ -145,7 +137,6 @@ class EventParticipant(RelatedEntityBase):
         db_table = 'opencivicdata_eventparticipant'
 
 
-@python_2_unicode_compatible
 class EventAgendaItem(RelatedBase):
     description = models.TextField()
     classification = ArrayField(base_field=models.TextField(), blank=True, default=list)
@@ -164,7 +155,6 @@ class EventAgendaItem(RelatedBase):
         db_table = 'opencivicdata_eventagendaitem'
 
 
-@python_2_unicode_compatible
 class EventRelatedEntity(RelatedEntityBase):
     agenda_item = models.ForeignKey(EventAgendaItem,
                                     related_name='related_entities',
@@ -199,7 +189,6 @@ class EventRelatedEntity(RelatedEntityBase):
         db_table = 'opencivicdata_eventrelatedentity'
 
 
-@python_2_unicode_compatible
 class EventAgendaMedia(EventMediaBase):
     agenda_item = models.ForeignKey(EventAgendaItem,
                                     related_name='media',
@@ -213,7 +202,6 @@ class EventAgendaMedia(EventMediaBase):
         db_table = 'opencivicdata_eventagendamedia'
 
 
-@python_2_unicode_compatible
 class EventAgendaMediaLink(MimetypeLinkBase):
     media = models.ForeignKey(EventAgendaMedia,
                               related_name='links',
