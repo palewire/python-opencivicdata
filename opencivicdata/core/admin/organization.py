@@ -34,7 +34,7 @@ class PostInline(admin.TabularInline):
     can_delete = False
     show_change_link = True
 
-    def has_add_permission(self, request, obj):
+    def has_add_permission(self, request, obj=None):
         return False
 
 
