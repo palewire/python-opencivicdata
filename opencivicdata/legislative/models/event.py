@@ -98,13 +98,8 @@ class EventMediaLink(MimetypeLinkBase):
         db_table = "opencivicdata_eventmedialink"
 
 
-<<<<<<< HEAD
-class EventDocument(MimetypeLinkBase):
-    event = models.ForeignKey(Event, related_name='documents', on_delete=models.CASCADE)
-=======
 class EventDocument(RelatedBase):
     event = models.ForeignKey(Event, related_name="documents", on_delete=models.CASCADE)
->>>>>>> upstream/master
     note = models.CharField(max_length=300)
     date = models.CharField(max_length=25, blank=True)  # YYYY-MM-DD HH:MM:SS+HH:MM
     classification = models.CharField(
