@@ -11,12 +11,12 @@ extras_require = {
 }
 
 setup(
-    name="opencivicdata",
-    version="3.2.0",
-    author="James Turk",
-    author_email="james@openstates.org",
+    name="ccdc-opencivicdata",
+    version="0.0.1",
+    author="Ben Welsh",
+    author_email="b@palewi.re",
     license="BSD",
-    description="python opencivicdata library",
+    description="campaign finance fork for python opencivicdata library",
     long_description="",
     url="",
     packages=find_packages(),

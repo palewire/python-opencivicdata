@@ -7,4 +7,9 @@ test:
 	pipenv run ./run-tests.sh
 	pipenv run flake8
 
-.PHONY: testdb test
+ship:
+	rm -rf build/
+	pipenv run python setup.py sdist bdist_wheel
+	pipenv run twine upload dist/* --skip-existing
+
+.PHONY: testdb test ship
