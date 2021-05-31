@@ -1,6 +1,71 @@
 # Changelog
 
-## 2.1.2 
+## 3.2.0 (2020-03-26)
+
+* add GinIndex for search (requires migration)
+* add 'enrolled' bill status
+
+## 3.1.0 (2020-01-28)
+
+* Add billaction.extras field (requires migration)
+
+## 3.0.0 (2019-11-25)
+
+* Drops support for Python 2, Django versions before < 2.2 LTS.
+* Change behavior of loaddivisions management command to require --bulk if
+  deletion & re-creation is desired.
+
+## 2.5.0 (2019-11-24)
+
+Improvements requiring migrations:
+
+* added experimental SearchableBill model
+* bugfix changes to EventDocument and EventMediaBase
+
+Bugfixes:
+
+* Fix PersonAdmin memberships display
+
+Other:
+
+* add event classification choices
+
+## 2.3.0 (2018-12-04)
+
+Improvements requiring migrations:
+
+* adjusted length of Event.name
+
+Other:
+
+* recommended Postgres version is now 10.x (>= 9.4 should still work but will no longer be tested)
+* removal of underdeveloped merge & unresolved legislators view
+
+## 2.2.1 (2018-10-29)
+
+Bugfixes:
+
+* Fix missing migrations
+
+Improvements:
+
+* new 'bill of address' classification
+
+## 2.2.0 (2018-10-09)
+
+Improvements requiring migrations:
+
+* add extras field to bill versions
+
+Improvements:
+
+* updated obsolete dependencies
+
+## 2.1.2 (2018-05-08)
+
+Improvements:
+
+* Add 'became-law' action classification.
 
 Bugfixes:
 
