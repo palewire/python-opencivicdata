@@ -3,7 +3,6 @@ from setuptools import setup, find_packages
 
 install_requires = [
     'Django>=3.2.*',
-    'psycopg2',
 ]
 
 extras_require = {
