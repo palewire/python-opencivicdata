@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField, JSONField
+from django.db.models import JSONField
+from django.contrib.postgres.fields import ArrayField
 
 from opencivicdata.core.models.base import OCDBase, LinkBase, OCDIDField, RelatedBase
 from opencivicdata.core.models import Organization, Person
