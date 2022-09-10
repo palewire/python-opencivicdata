@@ -11,7 +11,7 @@ extras_require = {
 
 setup(
     name="ccdc-opencivicdata",
-    version="0.0.4",
+    version="0.0.5",
     author="Ben Welsh",
     author_email="b@palewi.re",
     license="BSD",
