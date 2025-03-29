@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 install_requires = [
-    'Django>=4.0.*',
+    'Django',
 ]
 
 extras_require = {
@@ -11,7 +11,7 @@ extras_require = {
 
 setup(
     name="ccdc-opencivicdata",
-    version="0.0.5",
+    version="0.0.6",
     author="Ben Welsh",
     author_email="b@palewi.re",
     license="BSD",
